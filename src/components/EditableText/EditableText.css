@@ -1,0 +1,29 @@
+.editable-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.primary {
+    color: #0d6efd;
+}
+
+.primary:hover {
+    color: #0a4aaa;
+}
+
+.success {
+    color: #198754
+}
+
+.success:hover {
+    color: #186842
+}
+
+.icon {
+    margin-left: auto;
+    cursor: pointer;
+    font-size: 24px;
+    transition: 0.5s;
+}
