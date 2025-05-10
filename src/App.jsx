@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TodoApp from './components/TodoApp/TodoApp';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
-
   return (
-    <BrowserRouter basename="/todo-app">
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/todo/:id" element={<TodoApp />} />
