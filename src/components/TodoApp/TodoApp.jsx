@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { RiDeleteBack2Line } from "react-icons/ri";
 import { TiDeleteOutline } from "react-icons/ti";
 import './TodoApp.css';
+import { useTodo } from '../../hooks/useTodo';
 import EditableText from '../EditableText/EditableText';
-
+import { BiAddToQueue } from "react-icons/bi";
 
 const TodoApp = () => {
+    const { id: todoId } = useParams();
+
     const [task, setTask] = useState('');
-    const [tasks, setTasks] = useState([]);
+    const { tasks, setTasks, saveOnly } = useTodo(todoId);
+
 
     const handleAdd = () => {
         if (!task.trim()) return;
@@ -26,6 +30,10 @@ const TodoApp = () => {
         setTasks(updated);
     };
 
+    const saveTodoList = () => {
+        saveOnly();
+    };
+
     return (
         <div className="container mt-5">
             <h1 className="text-center mb-4">Minha Lista de Tarefas</h1>
@@ -39,7 +47,7 @@ const TodoApp = () => {
                     onChange={(e) => setTask(e.target.value)}
                 />
                 <button className="btn btn-primary" onClick={handleAdd}>
-                    Adicionar
+                    <BiAddToQueue className='fs-5' />
                 </button>
             </div>
 
@@ -55,7 +63,7 @@ const TodoApp = () => {
             </ul>
 
             <div className="mt-3">
-                <button className="btn btn-success w-100">Salvar</button>
+                <button className="btn btn-success w-100" onClick={saveTodoList}>Salvar</button>
             </div>
         </div>
     );
