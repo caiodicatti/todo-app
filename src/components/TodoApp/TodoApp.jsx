@@ -1,42 +1,78 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { TiDeleteOutline } from "react-icons/ti";
 import './TodoApp.css';
 import { useTodo } from '../../hooks/useTodo';
 import EditableText from '../EditableText/EditableText';
 import { BiAddToQueue } from "react-icons/bi";
+import ModalSuccess from '../ModalSuccess/ModalSuccess';
 
 const TodoApp = () => {
     const { id: todoId } = useParams();
 
     const [task, setTask] = useState('');
-    const { tasks, setTasks, saveOnly } = useTodo(todoId);
+    const { todos, setTodos, saveOnly } = useTodo(todoId);
+    const [showSuccess, setShowSuccess] = useState(false);
+    const inputTaskValue = useRef(null);
+    const navigate = useNavigate();
 
+    const generateNextId = (tasks) => {
+        if (tasks.length === 0) return 1;
+        return Math.max(...tasks.map(task => task.id)) + 1;
+    };
 
     const handleAdd = () => {
         if (!task.trim()) return;
-        setTasks([...tasks, task]);
+
+        const newId = generateNextId(todos.tasks);
+
+        const newTask = { id: newId, text: task };
+
+        const updatedTodos = {
+            ...todos,
+            tasks: [...todos.tasks, newTask]
+        };
+
+        setTodos(updatedTodos);
         setTask('');
+        inputTaskValue.current?.focus();
     };
 
-    const removeTask = (indexToRemove) => {
-        setTasks(tasks.filter((_, index) => index !== indexToRemove));
+    const removeTask = (taskId) => {
+        const removed = {
+            ...todos,
+            tasks: todos.tasks.filter((task) => task.id !== taskId)
+        };
+
+        setTodos(removed);
     };
 
-    const editTask = (index, value) => {
-        const updated = [...tasks];
-        updated[index] = value;
-        setTasks(updated);
+    const editTask = (taskId, newValue) => {
+        const updatedTasks = todos.tasks.map((task) =>
+            task.id === taskId ? { ...task, text: newValue } : task
+        );
+
+        const updatedTodos = {
+            ...todos,
+            tasks: updatedTasks
+        };
+
+        setTodos(updatedTodos);
     };
 
     const saveTodoList = () => {
         saveOnly();
+        setShowSuccess(true);
+    };
+
+    const returnHome = () => {
+        navigate(`/`);
     };
 
     return (
         <div className="container mt-5">
-            <h1 className="text-center mb-4">Minha Lista de Tarefas</h1>
+            <h1 className="text-center mb-4">{todos.name}</h1>
 
             <div className="input-group mb-3">
                 <input
@@ -44,6 +80,7 @@ const TodoApp = () => {
                     className="form-control"
                     placeholder="Digite sua tarefa"
                     value={task}
+                    ref={inputTaskValue}
                     onChange={(e) => setTask(e.target.value)}
                 />
                 <button className="btn btn-primary" onClick={handleAdd}>
@@ -52,11 +89,11 @@ const TodoApp = () => {
             </div>
 
             <ul className="list-group">
-                {tasks.map((t, index) => (
-                    <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                        <EditableText text={t} onSave={(newValue) => editTask(index, newValue)} />
+                {todos.tasks && todos.tasks.map((t, index) => (
+                    <li key={t.id} className="list-group-item d-flex justify-content-between align-items-center">
+                        <EditableText text={t.text} onSave={(newValue) => editTask(t.id, newValue)} />
                         <div className="action-buttons">
-                            <TiDeleteOutline className="btn-delete" onClick={() => removeTask(index)} />
+                            <TiDeleteOutline className="btn-delete" onClick={() => removeTask(t.id)} />
                         </div>
                     </li>
                 ))}
@@ -65,6 +102,20 @@ const TodoApp = () => {
             <div className="mt-3">
                 <button className="btn btn-success w-100" onClick={saveTodoList}>Salvar</button>
             </div>
+
+            <ModalSuccess
+                show={showSuccess}
+                handleClose={() => setShowSuccess(false)}
+                text={
+                    <>
+                        A lista <span className="fw-bold">{todos.name}</span> foi salva com sucesso!
+                    </>
+                }
+            />
+
+            <button onClick={returnHome} className="btn btn-primary btn-fixed">
+                Voltar
+            </button>
         </div>
     );
 };

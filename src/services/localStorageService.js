@@ -17,8 +17,8 @@ export const listTodos = () => {
 
     return Object.keys(localStorage)
         .filter((key) => key.startsWith(TODO_KEY_PREFIX))
-        .map((key) => ({
-            id: key.replace(TODO_KEY_PREFIX, ''),
-            data: JSON.parse(localStorage.getItem(key))
-        }));
+        .map((key) => {
+            const todo = JSON.parse(localStorage.getItem(key));
+            return { ...todo, id: key.replace(TODO_KEY_PREFIX, '') };
+        });
 };

@@ -1,31 +1,55 @@
 import { useState, useEffect } from 'react';
-import { getTodo, saveTodo, listTodos } from '../services/localStorageService';
-import { generate } from '../services/generateId';
+import { getTodo, saveTodo, listTodos, deleteTodo } from '../services/localStorageService';
+import { generateTodoId } from '../services/generateId';
 
 export const useTodo = (todoId) => {
 
-    const [tasks, setTasks] = useState([]);
+    todoId = todoId ?? 0;
+
+    const [todos, setTodos] = useState({});
 
     useEffect(() => {
         const stored = getTodo(todoId);
         if (stored) {
-            setTasks(stored)
+            setTodos(stored)
         };
     }, [todoId]);
 
     /*
-    const updateTasks = (newTasks) => {
-        setTasks(newTasks);
+    const updatetodos = (newtodos) => {
+        setTodos(newtodos);
         var id = todoId ?? generate();
-        saveTodo(id, newTasks);
+        saveTodo(id, newtodos);
     };
     */
 
-    const saveOnly = () => {
-        const id = todoId ?? generate();
-        saveTodo(id, tasks);
+    const saveNewTodo = (todoName) => {
+        const id = generateTodoId();
+
+        const newTodo = {
+            id: id,
+            name: todoName,
+            tasks: []
+        };
+
+        saveTodo(id, newTodo);
+
+        return id;
     };
 
-    //return { tasks, setTasks: updateTasks, saveOnly };
-    return { tasks, setTasks, saveOnly };
+    const saveOnly = () => {
+        const id = todoId ?? generateTodoId();
+        saveTodo(id, todos);
+    };
+
+    const listAll = () => {
+        return listTodos();
+    };
+
+    const remove = (id) => {
+        deleteTodo(id);
+    };
+
+    //return { todos, setTodos: updatetodos, saveOnly };
+    return { todos, setTodos, saveOnly, listAll, saveNewTodo, remove };
 };
