@@ -3,20 +3,32 @@ import './TodoList.css';
 import { useTodo } from '../../hooks/useTodo';
 import { Link } from "react-router-dom";
 import { PiSmileySad } from "react-icons/pi";
+import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
 
 const TodoList = () => {
 
     const { remove, listAll } = useTodo();
     const [allTodos, setAllTodos] = useState([]);
 
+    // modal confirm delete
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [todoToDelete, setTodoToDelete] = useState(null);
+
+    const handleOpenModalConfirmDelete = (todo) => {
+        setTodoToDelete(todo);
+        setShowDeleteModal(true);
+    };
+
+    const handleDeleteConfirmed = () => {
+        remove(todoToDelete.id)
+        setAllTodos(listAll());
+        setShowDeleteModal(false);
+        setTodoToDelete(null);
+    };
+
     useEffect(() => {
         setAllTodos(listAll());
     }, []);
-
-    const removeTodo = (todoId) => {
-        remove(todoId)
-        setAllTodos(listAll());
-    };
 
     return (
         <div className="container">
@@ -37,9 +49,17 @@ const TodoList = () => {
                                 <Link to={`/todo/${todo.id}`} className="btn btn-primary me-2 btn-default-size ">
                                     Editar
                                 </Link>
-                                <button className="btn btn-danger btn-default-size" onClick={() => removeTodo(todo.id)}>
+                                <button className="btn btn-danger btn-default-size" onClick={() => handleOpenModalConfirmDelete(todo)}>
                                     Excluir
                                 </button>
+
+                                <ModalConfirmDelete
+                                    show={showDeleteModal}
+                                    onClose={() => setShowDeleteModal(false)}
+                                    onConfirm={handleDeleteConfirmed}
+                                    title="Deseja excluir essa lista?"
+                                    body={`Você tem certeza que deseja excluir a lista "${todoToDelete?.name}"?`}
+                                />
                             </div>
                         </div>
                     </div>
