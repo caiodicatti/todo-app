@@ -1,21 +1,29 @@
 import React, { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { TiDeleteOutline } from "react-icons/ti";
-import './TodoApp.css';
-import { useTodo } from '../../hooks/useTodo';
-import EditableText from '../EditableText/EditableText';
 import { BiAddToQueue } from "react-icons/bi";
-import ModalSuccess from '../ModalSuccess/ModalSuccess';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const TodoApp = () => {
+import './TodoEditor.css';
+
+import { useTodo } from '../../hooks/useTodo';
+import EditableText from '../../components/EditableText/EditableText';
+import ModalSuccess from '../../components/ModalSuccess/ModalSuccess';
+
+const TodoEditor = () => {
+    // Router
     const { id: todoId } = useParams();
-
-    const [task, setTask] = useState('');
-    const { todos, setTodos, saveOnly } = useTodo(todoId);
-    const [showSuccess, setShowSuccess] = useState(false);
-    const inputTaskValue = useRef(null);
     const navigate = useNavigate();
+
+    // Refs
+    const inputTaskValue = useRef(null);
+
+    // States
+    const [task, setTask] = useState('');
+    const [showSuccess, setShowSuccess] = useState(false);
+
+    // Custom Hook
+    const { todos, setTodos, saveOnly } = useTodo(todoId);
 
     const generateNextId = (tasks) => {
         if (tasks.length === 0) return 1;
@@ -118,6 +126,6 @@ const TodoApp = () => {
             </button>
         </div>
     );
-};
+}
 
-export default TodoApp;
+export default TodoEditor

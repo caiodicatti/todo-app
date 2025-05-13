@@ -2,12 +2,19 @@ import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useTodo } from '../../hooks/useTodo';
+import './ModalNewTodo.css';
 
 const ModalNewTodo = ({ show, handleClose }) => {
+    // Custom Hook
     const { saveNewTodo } = useTodo();
+
+    // State
     const [todoName, setTodoName] = useState('');
+
+    // Router
     const navigate = useNavigate();
 
+    // Handlers
     const handleCleanAndClose = () => {
         setTodoName("");
         handleClose();

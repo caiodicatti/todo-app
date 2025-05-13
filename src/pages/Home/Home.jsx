@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import TodoList from '../../components/TodoList/TodoList'
 import './Home.css';
-import { FaPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import ModalNewTodo from "../../components/ModalNewTodo/ModalNewTodo";
+import TodoList from '../../components/TodoList/TodoList';
+import ModalNewTodo from '../../components/ModalNewTodo/ModalNewTodo';
+import { FaPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
+    // States
     const [showModal, setShowModal] = useState(false);
+
+    // Handlers
     const handleShow = () => setShowModal(true);
     const handleClose = () => setShowModal(false);
 

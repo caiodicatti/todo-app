@@ -4,9 +4,11 @@ import { FaRegSave } from "react-icons/fa";
 import "./EditableText.css";
 
 function EditableText({ text, onSave }) {
+    // States
     const [isEditing, setIsEditing] = useState(false);
     const [value, setValue] = useState(text);
 
+    // Handlers
     const handleSave = () => {
         setIsEditing(false);
         onSave(value);

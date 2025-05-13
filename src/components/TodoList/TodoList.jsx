@@ -1,18 +1,24 @@
-import React, { useState, useEffect } from 'react'
-import './TodoList.css';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { PiSmileySad } from 'react-icons/pi';
 import { useTodo } from '../../hooks/useTodo';
-import { Link } from "react-router-dom";
-import { PiSmileySad } from "react-icons/pi";
-import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
+import ModalConfirmDelete from '../ModalConfirmDelete/ModalConfirmDelete';
+import './TodoList.css';
 
 const TodoList = () => {
 
+    // Custom Hook
     const { remove, listAll } = useTodo();
-    const [allTodos, setAllTodos] = useState([]);
 
-    // modal confirm delete
+    // States
+    const [allTodos, setAllTodos] = useState([]);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [todoToDelete, setTodoToDelete] = useState(null);
+
+    // Effects
+    useEffect(() => {
+        setAllTodos(listAll());
+    }, []);
 
     const handleOpenModalConfirmDelete = (todo) => {
         setTodoToDelete(todo);
@@ -25,10 +31,6 @@ const TodoList = () => {
         setShowDeleteModal(false);
         setTodoToDelete(null);
     };
-
-    useEffect(() => {
-        setAllTodos(listAll());
-    }, []);
 
     return (
         <div className="container">

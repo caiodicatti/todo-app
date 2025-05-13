@@ -3,6 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 
 const ModalSuccess = ({ show, handleClose, text }) => {
 
+    // Effects
     useEffect(() => {
         if (show) {
             const timer = setTimeout(() => {
