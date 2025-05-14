@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename='todo-app'>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/todo/:id" element={<TodoEditor />} />
