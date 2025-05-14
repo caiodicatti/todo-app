@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { TiDeleteOutline } from "react-icons/ti";
 import { BiAddToQueue } from "react-icons/bi";
+import ButtonFloatingAction from '../../components/ButtonFloatingAction/ButtonFloatingAction';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './TodoEditor.css';
@@ -35,7 +36,7 @@ const TodoEditor = () => {
 
         const newId = generateNextId(todos.tasks);
 
-        const newTask = { id: newId, text: task };
+        const newTask = { id: newId, text: task, check: false };
 
         const updatedTodos = {
             ...todos,
@@ -121,9 +122,8 @@ const TodoEditor = () => {
                 }
             />
 
-            <button onClick={returnHome} className="btn btn-primary btn-fixed">
-                Voltar
-            </button>
+            <ButtonFloatingAction text={'Voltar'} style={'btn btn-primary'} action={returnHome} />
+
         </div>
     );
 }

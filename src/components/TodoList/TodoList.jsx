@@ -45,9 +45,9 @@ const TodoList = () => {
                         <div className="card h-100">
                             <div className="card-body">
                                 <h5 className="card-title">{todo.name}</h5>
-                                <button className="btn btn-success me-2 btn-default-size ">
+                                <Link to={`/todo/use/${todo.id}`} className="btn btn-success me-2 btn-default-size ">
                                     Utilizar
-                                </button>
+                                </Link>
                                 <Link to={`/todo/${todo.id}`} className="btn btn-primary me-2 btn-default-size ">
                                     Editar
                                 </Link>

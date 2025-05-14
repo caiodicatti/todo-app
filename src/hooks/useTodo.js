@@ -37,9 +37,10 @@ export const useTodo = (todoId) => {
         return id;
     };
 
-    const saveOnly = () => {
+    const saveOnly = (data) => {
         const id = todoId ?? generateTodoId();
-        saveTodo(id, todos);
+        const dataSave = data ?? todos
+        saveTodo(id, dataSave);
     };
 
     const listAll = () => {

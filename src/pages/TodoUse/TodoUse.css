@@ -1,0 +1,15 @@
+.list-item {
+    margin: 10px 0px;
+    border-top-width: 1px !important;
+    border-radius: 7px;
+}
+
+.checked {
+    color: #28a745;
+    border: solid 2px #28a745;
+}
+
+.form-check-input:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
