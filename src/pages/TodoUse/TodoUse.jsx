@@ -1,6 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ButtonFloatingAction from '../../components/ButtonFloatingAction/ButtonFloatingAction';
+import TitleCardDefault from '../../components/TitleCardDefault/TitleCardDefault';
+import { FaCalendarCheck } from "react-icons/fa";
+
 import './TodoUse.css';
 
 import { useTodo } from '../../hooks/useTodo';
@@ -34,7 +37,7 @@ const TodoUse = () => {
     return (
         <div className="container mt-5">
 
-            <h1 className="text-center mb-4">{todos.name}</h1>
+            <TitleCardDefault title={todos.name} icon={<FaCalendarCheck style={{ marginRight: 10, color: '#00b09b' }} />} />
 
             <ul className="list-group">
                 {todos.tasks && todos.tasks.map((t, index) => (
@@ -55,7 +58,7 @@ const TodoUse = () => {
                 ))}
             </ul>
 
-            <ButtonFloatingAction text={'Voltar'} style={'btn btn-primary'} action={returnHome} />
+            <ButtonFloatingAction text={'Voltar'} style={'btn btn-primary'} action={returnHome} title={'Voltar a página home'} />
         </div>
     )
 }

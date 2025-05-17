@@ -2,7 +2,9 @@ import React, { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { TiDeleteOutline } from "react-icons/ti";
 import { BiAddToQueue } from "react-icons/bi";
+import { FaEdit } from 'react-icons/fa';
 import ButtonFloatingAction from '../../components/ButtonFloatingAction/ButtonFloatingAction';
+import TitleCardDefault from '../../components/TitleCardDefault/TitleCardDefault';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './TodoEditor.css';
@@ -81,7 +83,8 @@ const TodoEditor = () => {
 
     return (
         <div className="container mt-5">
-            <h1 className="text-center mb-4">{todos.name}</h1>
+
+            <TitleCardDefault title={todos.name} icon={<FaEdit style={{ marginRight: 10, color: '#00b09b' }} />} />
 
             <div className="input-group mb-3">
                 <input
@@ -122,7 +125,7 @@ const TodoEditor = () => {
                 }
             />
 
-            <ButtonFloatingAction text={'Voltar'} style={'btn btn-primary'} action={returnHome} />
+            <ButtonFloatingAction text={'Voltar'} style={'btn btn-primary'} action={returnHome} title={'Voltar a página home'} />
 
         </div>
     );
