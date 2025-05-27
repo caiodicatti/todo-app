@@ -89,7 +89,7 @@ const TodoEditor = () => {
             <div className="input-group mb-3">
                 <input
                     type="text"
-                    className="form-control"
+                    className="form-control input-bg"
                     placeholder="Digite sua tarefa"
                     value={task}
                     ref={inputTaskValue}
@@ -102,7 +102,7 @@ const TodoEditor = () => {
 
             <ul className="list-group">
                 {todos.tasks && todos.tasks.map((t, index) => (
-                    <li key={t.id} className="list-group-item d-flex justify-content-between align-items-center">
+                    <li key={t.id} className="list-group-item d-flex justify-content-between align-items-center input-bg">
                         <EditableText text={t.text} onSave={(newValue) => editTask(t.id, newValue)} />
                         <div className="action-buttons">
                             <TiDeleteOutline className="btn-delete" onClick={() => removeTask(t.id)} />

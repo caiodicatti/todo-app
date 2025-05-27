@@ -11,6 +11,29 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bg-gradient: linear-gradient(135deg, #bdbdbd 0%, #ffffff 100%);
+  --text-title-color: #2c3e50;
+  --card-bg: #f8f9fa;
+  --card-title: #2c3e50;
+  --input-text-bg: #f8f9fa;
+  --input-text-font: black;
+  --toggle-bg: #bfbfbf;
+}
+
+[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --text-title-color: rgb(235, 229, 229);
+  --card-title: rgb(235, 229, 229);
+  --card-bg: #1f1f1f;
+  --input-text-bg: #434343;
+  --input-text-font: white;
+  --primary-color: #0d6efd;
+  --btn-bg: #3a3a3a;
+  --btn-text: #f1f1f1;
+  --bg-gradient: linear-gradient(135deg, #2c2c2c 0%, #1e1e1e 100%);
+  --toggle-bg: #555;
 }
 
 a {
@@ -29,7 +52,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #bdbdbd 0%, #ffffff 100%);
+  background: var(--bg-gradient);
 }
 
 h1 {

@@ -41,7 +41,7 @@ const TodoUse = () => {
 
             <ul className="list-group">
                 {todos.tasks && todos.tasks.map((t, index) => (
-                    <li key={t.id} className={`list-group-item d-flex justify-content-between align-items-center list-item ${t.check ? 'checked' : ''}`}>
+                    <li key={t.id} className={`list-group-item d-flex justify-content-between align-items-center list-item input-bg ${t.check ? 'checked' : ''}`}>
                         <div className="form-check form-switch">
                             <input
                                 className="form-check-input"

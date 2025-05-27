@@ -1,0 +1,24 @@
+.footer-signature {
+    position: fixed;
+    bottom: 10px;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.footer-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+    .footer-signature {
+        position: unset;
+        padding: 10px 0;
+    }
+}

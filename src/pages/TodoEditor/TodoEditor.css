@@ -18,3 +18,18 @@
     align-items: center;
     gap: 10px;
 }
+
+.input-bg {
+    background: var(--input-text-bg);
+    color: var(--input-text-font);
+}
+
+.input-bg:focus {
+    background: var(--input-text-bg);
+    color: var(--input-text-font);
+}
+
+.input-bg::placeholder {
+    color: var(--input-text-font);
+    opacity: 1;
+}

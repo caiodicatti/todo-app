@@ -1,0 +1,4 @@
+.theme-toggle-container {
+    display: flex;
+    justify-content: flex-end;
+}
