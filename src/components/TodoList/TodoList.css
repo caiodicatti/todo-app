@@ -8,7 +8,7 @@
 .card-color {
     background-color: var(--card-bg);
     border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px var(--card-shadow-color);
     padding: 20px;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     position: relative;
@@ -18,7 +18,7 @@
 }
 
 .card-color:hover {
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 14px var(--card-shadow-color-hover);
     transform: translateY(-2px);
 }
 

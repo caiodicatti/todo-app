@@ -19,6 +19,8 @@
   --input-text-bg: #f8f9fa;
   --input-text-font: black;
   --toggle-bg: #bfbfbf;
+  --card-shadow-color: rgba(0, 0, 0, 0.1);
+  --card-shadow-color-hover: rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] {
@@ -34,6 +36,8 @@
   --btn-text: #f1f1f1;
   --bg-gradient: linear-gradient(135deg, #2c2c2c 0%, #1e1e1e 100%);
   --toggle-bg: #555;
+  --card-shadow-color: rgba(0, 0, 0, 0.5);
+  --card-shadow-color-hover: rgba(0, 0, 0, 0.7);
 }
 
 a {
