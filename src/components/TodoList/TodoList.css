@@ -29,6 +29,7 @@
 .msg-empty {
     font-size: 26px;
     margin: 22px 0px;
+    color: var(--msg-list-empty)
 }
 
 .card-title {

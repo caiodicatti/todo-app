@@ -21,6 +21,7 @@
   --toggle-bg: #bfbfbf;
   --card-shadow-color: rgba(0, 0, 0, 0.1);
   --card-shadow-color-hover: rgba(0, 0, 0, 0.15);
+  --msg-list-empty: #212529;
 }
 
 [data-theme="dark"] {
@@ -38,6 +39,7 @@
   --toggle-bg: #555;
   --card-shadow-color: rgba(0, 0, 0, 0.5);
   --card-shadow-color-hover: rgba(0, 0, 0, 0.7);
+  --msg-list-empty: #d7d7d7;
 }
 
 a {
