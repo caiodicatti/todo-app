@@ -13,6 +13,8 @@
   -moz-osx-font-smoothing: grayscale;
 
   --bg-gradient: linear-gradient(135deg, #bdbdbd 0%, #ffffff 100%);
+  --bg-modal-gradient: linear-gradient(315deg, #bdbdbd 0%, #ffffff 100%);
+  --font-modal: black;
   --text-title-color: #2c3e50;
   --card-bg: #f8f9fa;
   --card-title: #2c3e50;
@@ -36,6 +38,8 @@
   --btn-bg: #3a3a3a;
   --btn-text: #f1f1f1;
   --bg-gradient: linear-gradient(135deg, #2c2c2c 0%, #1e1e1e 100%);
+  --bg-modal-gradient: linear-gradient(315deg, #2c2c2c 0%, #464646 100%);
+  --font-modal: rgb(235, 229, 229);
   --toggle-bg: #555;
   --card-shadow-color: rgba(0, 0, 0, 0.5);
   --card-shadow-color-hover: rgba(0, 0, 0, 0.7);
@@ -86,6 +90,16 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+.modal-content {
+  background: var(--bg-modal-gradient);
+  color: var(--font-modal) !important;
+}
+
+[data-theme="dark"] .modal-header .btn-close {
+  filter: invert(1);
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {

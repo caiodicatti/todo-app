@@ -38,6 +38,7 @@ const ModalNewTodo = ({ show, handleClose }) => {
                         <Form.Group className="mb-3" controlId="formTodoName">
                             <Form.Label>Nome da Lista</Form.Label>
                             <Form.Control
+                                className="input-bg"
                                 type="text"
                                 placeholder="Digite o nome da lista"
                                 value={todoName}

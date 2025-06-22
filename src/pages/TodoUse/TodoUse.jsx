@@ -34,6 +34,37 @@ const TodoUse = () => {
         navigate(`/`);
     };
 
+    const checkAllTasks = () => {
+        const updatedTasks = todos.tasks.map(task => ({
+            ...task,
+            check: true
+        }));
+
+        const updatedTodos = {
+            ...todos,
+            tasks: updatedTasks
+        };
+
+        setTodos(updatedTodos);
+        saveOnly(updatedTodos);
+    };
+
+    const uncheckAllTasks = () => {
+        const updatedTasks = todos.tasks.map(task => ({
+            ...task,
+            check: false
+        }));
+
+        const updatedTodos = {
+            ...todos,
+            tasks: updatedTasks
+        };
+
+        setTodos(updatedTodos);
+        saveOnly(updatedTodos);
+    };
+
+
     return (
         <div className="container mt-5">
 
@@ -58,8 +89,21 @@ const TodoUse = () => {
                 ))}
             </ul>
 
+            <div className="mt-3 d-flex gap-2 justify-content-center">
+                <button className="btn btn-outline-secondary px-3 py-2" onClick={uncheckAllTasks}>
+                    Desmarcar todas
+                </button>
+
+                <button className="btn btn-outline-success px-3 py-2" onClick={checkAllTasks}>
+                    Marcar todas
+                </button>
+            </div>
+
+            <div className="container mt-5 pb-5">
+            </div>
+
             <ButtonFloatingAction text={'Voltar'} style={'btn btn-primary'} action={returnHome} title={'Voltar a página home'} />
-        </div>
+        </div >
     )
 }
 
