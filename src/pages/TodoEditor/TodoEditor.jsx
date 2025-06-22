@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { TiDeleteOutline } from "react-icons/ti";
-import { BiAddToQueue } from "react-icons/bi";
+import { BiAddToQueue, BiListPlus } from "react-icons/bi";
 import { FaEdit } from 'react-icons/fa';
 import ButtonFloatingAction from '../../components/ButtonFloatingAction/ButtonFloatingAction';
 import TitleCardDefault from '../../components/TitleCardDefault/TitleCardDefault';
@@ -12,6 +12,8 @@ import './TodoEditor.css';
 import { useTodo } from '../../hooks/useTodo';
 import EditableText from '../../components/EditableText/EditableText';
 import ModalSuccess from '../../components/ModalSuccess/ModalSuccess';
+import ModalBatchAdd from '../../components/ModalBatchAdd/ModalBatchAdd';
+
 
 const TodoEditor = () => {
     // Router
@@ -24,6 +26,8 @@ const TodoEditor = () => {
     // States
     const [task, setTask] = useState('');
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showBatchModal, setShowBatchModal] = useState(false);
+
 
     // Custom Hook
     const { todos, setTodos, saveOnly } = useTodo(todoId);
@@ -81,6 +85,28 @@ const TodoEditor = () => {
         navigate(`/`);
     };
 
+    const handleOpenBatchModal = () => setShowBatchModal(true);
+    const handleCloseBatchModal = () => setShowBatchModal(false);
+
+    const handleSaveBatchTasks = (tasks) => {
+
+        const currentId = generateNextId(todos.tasks);
+
+        const newTasks = tasks.map((task, i) => ({
+            id: currentId + i,
+            text: task,
+            check: false,
+        }));
+
+        const updatedTodos = {
+            ...todos,
+            tasks: [...todos.tasks, ...newTasks],
+        };
+
+        setTodos(updatedTodos);
+        setTask('');
+    };
+
     return (
         <div className="container mt-5">
 
@@ -95,8 +121,12 @@ const TodoEditor = () => {
                     ref={inputTaskValue}
                     onChange={(e) => setTask(e.target.value)}
                 />
-                <button className="btn btn-primary" onClick={handleAdd}>
+                <button className="btn btn-primary" onClick={handleAdd} title="Adicionar item">
                     <BiAddToQueue className='fs-5' />
+                </button>
+
+                <button className="btn btn-purple" onClick={handleOpenBatchModal} title="Adicionar em lote">
+                    <BiListPlus className='fs-5' />
                 </button>
             </div>
 
@@ -124,6 +154,15 @@ const TodoEditor = () => {
                     </>
                 }
             />
+
+            <ModalBatchAdd
+                show={showBatchModal}
+                handleClose={handleCloseBatchModal}
+                onSaveBatch={handleSaveBatchTasks}
+            />
+
+            <div className="container mt-5 pb-5">
+            </div>
 
             <ButtonFloatingAction text={'Voltar'} style={'btn btn-primary'} action={returnHome} title={'Voltar a página home'} />
 
